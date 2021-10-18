@@ -204,13 +204,13 @@ namespace SystemMonitor {
 			// ni_taskbar
 			// 
 			this->ni_taskbar->ContextMenuStrip = this->cms_menu;
-			this->ni_taskbar->Text = L"notifyIcon1";
+			this->ni_taskbar->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"ni_taskbar.Icon")));
+			this->ni_taskbar->Text = L"Resource Monitor";
 			this->ni_taskbar->Visible = true;
 			// 
 			// cms_menu
 			// 
-			this->cms_menu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3)
-			{
+			this->cms_menu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->showToolStripMenuItem,
 					this->hideToolStripMenuItem, this->exitToolStripMenuItem
 			});
@@ -289,8 +289,8 @@ namespace SystemMonitor {
 		}
 		private: System::Void MyForm_Shown(System::Object^ sender, System::EventArgs^ e)
 		{
-			this->Show();
-			timer->Enabled = true;
+			this->Hide();
+			timer->Enabled = false;
 			x = 0;
 			Y1 = gcnew array<System::Int32>(260);
 			Y2 = gcnew array<System::Int32>(260);
