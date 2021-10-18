@@ -258,7 +258,7 @@ namespace SystemMonitor {
 			this->Controls->Add(this->pan_cpu);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Resource Monitor";
 			this->Shown += gcnew System::EventHandler(this, &MyForm::MyForm_Shown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_cpu))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_mem))->EndInit();
