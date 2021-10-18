@@ -189,6 +189,11 @@ namespace SystemMonitor {
 			this->pc_cpu->CounterName = L"Czas Procesora (%)";
 			this->pc_cpu->InstanceName = L"_Total";
 			// 
+			// pc_mem
+			// 
+			this->pc_mem->CategoryName = L"Pamiêæ";
+			this->pc_mem->CounterName = L"Zadeklarowane bajty w u¿yciu (%)";
+			// 
 			// pc_disk
 			// 
 			this->pc_disk->CategoryName = L"Dysk logiczny";
@@ -203,7 +208,8 @@ namespace SystemMonitor {
 			// 
 			// cms_menu
 			// 
-			this->cms_menu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->cms_menu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3)
+			{
 				this->showToolStripMenuItem,
 					this->hideToolStripMenuItem, this->exitToolStripMenuItem
 			});
@@ -254,7 +260,7 @@ namespace SystemMonitor {
 			this->Text = L"MyForm";
 			this->Shown += gcnew System::EventHandler(this, &MyForm::MyForm_Shown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_cpu))->EndInit();
-			//(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_mem))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_mem))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pc_disk))->EndInit();
 			this->cms_menu->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -292,7 +298,7 @@ namespace SystemMonitor {
 		private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) 
 		{
 			lab_cpu_L->Text = pc_cpu->NextValue().ToString();
-			//lab_mem_L->Text = pc_mem->NextValue().ToString();
+			lab_mem_L->Text = pc_mem->NextValue().ToString();
 			lab_disk_L->Text = pc_disk->NextValue().ToString();
 			DrawChart();
 		}
@@ -312,7 +318,7 @@ namespace SystemMonitor {
 				e->Graphics->DrawLine(linePen, x1 - 1, 100 - Y1[x1 - 1], x1, 100 - Y1[x1]);
 			}
 		}
-		/*private: System::Void pan_mem_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) 
+		private: System::Void pan_mem_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) 
 		{
 			Pen^ linePen = gcnew Pen(System::Drawing::Color::Blue);
 			if (x > 250)
@@ -324,9 +330,7 @@ namespace SystemMonitor {
 			{
 				e->Graphics->DrawLine(linePen, x1 - 1, 100 - Y2[x1 - 1], x1, 100 - Y2[x1]);
 			}
-
-		}*/
-
+		}
 		private: System::Void pan_disk_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
 		{
 			Pen^ linePen = gcnew Pen(System::Drawing::Color::Blue);
@@ -342,8 +346,6 @@ namespace SystemMonitor {
 		}
 };
 }
-
-
 //Funkcja rysuj¹ca
 void SystemMonitor::MyForm::DrawChart()
 {
@@ -354,9 +356,9 @@ void SystemMonitor::MyForm::DrawChart()
 	Y1[x] = (System::Int32)YSingle;
 	pan_cpu->Refresh();
 
-	//YSingle = Convert::ToSingle(lab_mem_L->Text);
-	//Y2[x] = (System::Int32)YSingle;
-	//pan_mem->Refresh();
+	YSingle = Convert::ToSingle(lab_mem_L->Text);
+	Y2[x] = (System::Int32)YSingle;
+	pan_mem->Refresh();
 
 	YSingle = Convert::ToSingle(lab_disk_L->Text);
 	Y3[x] = (System::Int32)YSingle;
