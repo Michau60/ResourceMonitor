@@ -113,6 +113,7 @@ namespace SystemMonitor {
 			this->pan_mem->Name = L"pan_mem";
 			this->pan_mem->Size = System::Drawing::Size(250, 101);
 			this->pan_mem->TabIndex = 1;
+			this->pan_mem->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::pan_mem_Paint);
 			// 
 			// pan_disk
 			// 
